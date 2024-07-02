@@ -1,0 +1,10 @@
+{
+  "appId": "no.bleach.app",
+  "appName": "no-bleach",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}
