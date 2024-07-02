@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">no-bleach</string>
+    <string name="title_activity_main">no-bleach</string>
+    <string name="package_name">no.bleach.app</string>
+    <string name="custom_url_scheme">no.bleach.app</string>
+</resources>
