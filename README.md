@@ -16,3 +16,5 @@ To run the provided example, you can use `npm start` command.
 ```bash
 npm start
 ```
+
+<!-- TODO: How to debug the capacitor android APP? -->
