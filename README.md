@@ -1,3 +1,7 @@
+## Package management
+
+https://pnpm.io/zh-TW/installation
+
 ## Sync your web code to your native project
 
 ```
