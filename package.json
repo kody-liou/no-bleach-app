@@ -11,13 +11,19 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "sync": "cap sync"
+    "sync": "cap sync",
+    "run:ios": "cap run ios",
+    "run:android": "cap run android",
+    "open:ios": "cap open ios",
+    "open:android": "cap open android",
+    "build :ios": "cap build ios",
+    "build :android": "cap build android"
   },
   "dependencies": {
-    "@capacitor/android": "^6.1.0",
+    "@capacitor/android": "6.1.0",
     "@capacitor/camera": "6.0.1",
     "@capacitor/core": "6.1.0",
-    "@capacitor/ios": "^6.1.0",
+    "@capacitor/ios": "6.1.0",
     "@capacitor/splash-screen": "6.0.1"
   },
   "devDependencies": {

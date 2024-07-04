@@ -22,3 +22,7 @@ npm start
 ```
 
 <!-- TODO: How to debug the capacitor android APP? -->
+
+## Deploy 
+
+You can choose Appflow or fastlane
