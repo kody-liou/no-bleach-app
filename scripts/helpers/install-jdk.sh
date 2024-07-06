@@ -28,7 +28,7 @@ install_openjdk_windows() {
 
   if [ "$EUID" -ne 0 ]; then
     echo "Running with elevated privileges..."
-    powershell -Command "Start-Process powershell -ArgumentList 'choco install -y openjdk17' -Verb RunAs"
+    powershell -Command "Start-Process powershell -ArgumentList 'choco install -y openjdk17' -Verb RunAs -Wait"
   else
     choco install -y openjdk17
   fi
@@ -63,7 +63,7 @@ case "$(uname -s)" in
     export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
     ;;
   CYGWIN*|MINGW32*|MSYS*|MINGW*)
-    export JAVA_HOME="C:/Program Files/OpenJDK/jdk-17"
+    export JAVA_HOME="/c/Program Files/OpenJDK/jdk-17"
     ;;
   *)
     echo "Unsupported OS. Please set JAVA_HOME manually."
