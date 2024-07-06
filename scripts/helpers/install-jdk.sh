@@ -43,8 +43,22 @@ if ! command_exists java || [[ "$(java -version 2>&1)" != *"17."* ]]; then
 fi
 
 # Set JAVA_HOME just for this process
-export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+case "$(uname -s)" in
+  Darwin)
+    export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+    ;;
+  Linux)
+    export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
+    ;;
+  CYGWIN*|MINGW32*|MSYS*|MINGW*)
+    export JAVA_HOME="/c/Program Files/OpenJDK/jdk-17"
+    ;;
+  *)
+    echo "Unsupported OS. Please set JAVA_HOME manually."
+    exit 1
+    ;;
+esac
 
 # Print JAVA_HOME to verify
 echo $JAVA_HOME
-echo "OpenJDK installed success!"
+echo "OpenJDK installed successfully!"
