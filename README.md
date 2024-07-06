@@ -3,7 +3,8 @@
 - Android Gradle plugin requires Java 17 to run. You are currently using Java 11.
     brew install openjdk@17
 
-
+## Uninstall JAVA
+brew uninstall openjdk@17
 
 ## Install
 ```bash
