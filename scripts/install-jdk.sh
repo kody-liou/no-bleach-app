@@ -41,3 +41,5 @@ if ! command_exists java || [[ "$(java -version 2>&1)" != *"17."* ]]; then
       ;;
   esac
 fi
+
+# TODO: Make this script to set JAVA_HOME just in this process (Do not write anything into disk!)
