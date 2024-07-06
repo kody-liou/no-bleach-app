@@ -20,7 +20,7 @@ install_openjdk_linux() {
 # Function to install OpenJDK 17 on Windows (requires Chocolatey)
 install_openjdk_windows() {
   # Check if OpenJDK 17 is already installed
-  if java -version 2>&1 | grep -q '17'; then
+  if [ -d "/c/Program Files/OpenJDK/jdk-17" ]; then
     echo "OpenJDK 17 is already installed."
     return
   fi
