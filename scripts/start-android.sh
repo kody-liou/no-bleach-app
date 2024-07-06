@@ -3,16 +3,18 @@
 # Define image name
 IMAGE_NAME="android-build"
 
+# Get the directory of the current script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Navigate to the directory containing the Dockerfile
-# TODO: Fix Error: cd: ./scripts/dockerfiles/android-env: Not a directory (android-env actually is the Dockerfile itself)
-cd "$(dirname "$0")/dockerfiles/android-env"
+cd "$SCRIPT_DIR/dockerfiles"
 
 # Build the Docker image
 echo "Building Docker image..."
-docker build -t $IMAGE_NAME .
+docker build -t $IMAGE_NAME -f android-env .
 
 # Navigate back to the project root directory
-cd ../../..
+cd "$SCRIPT_DIR/../.."
 
 # Run the Docker container and execute the development script
 echo "Running Docker container..."
