@@ -4,6 +4,7 @@
 IMAGE_NAME="android-build"
 
 # Navigate to the directory containing the Dockerfile
+# TODO: Fix Error: cd: ./scripts/dockerfiles/android-env: Not a directory (android-env actually is the Dockerfile itself)
 cd "$(dirname "$0")/dockerfiles/android-env"
 
 # Build the Docker image
