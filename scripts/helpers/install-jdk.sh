@@ -19,7 +19,19 @@ install_openjdk_linux() {
 
 # Function to install OpenJDK 17 on Windows (requires Chocolatey)
 install_openjdk_windows() {
-  choco install -y openjdk17
+  if ! command_exists choco; then
+    echo "Chocolatey is not installed. Installing Chocolatey..."
+    set -e
+    powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+    set +e
+  fi
+
+  if [ "$EUID" -ne 0 ]; then
+    echo "Running with elevated privileges..."
+    powershell -Command "Start-Process powershell -ArgumentList 'choco install -y openjdk17' -Verb RunAs"
+  else
+    choco install -y openjdk17
+  fi
 }
 
 # Detect operating system and install OpenJDK 17 if not installed
@@ -51,7 +63,7 @@ case "$(uname -s)" in
     export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
     ;;
   CYGWIN*|MINGW32*|MSYS*|MINGW*)
-    export JAVA_HOME="/c/Program Files/OpenJDK/jdk-17"
+    export JAVA_HOME="C:/Program Files/OpenJDK/jdk-17"
     ;;
   *)
     echo "Unsupported OS. Please set JAVA_HOME manually."
