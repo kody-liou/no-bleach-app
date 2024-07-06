@@ -42,4 +42,9 @@ if ! command_exists java || [[ "$(java -version 2>&1)" != *"17."* ]]; then
   esac
 fi
 
-# TODO: Make this script to set JAVA_HOME just in this process (Do not write anything into disk!)
+# Set JAVA_HOME just for this process
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+
+# Print JAVA_HOME to verify
+echo $JAVA_HOME
+echo "OpenJDK installed success!"
