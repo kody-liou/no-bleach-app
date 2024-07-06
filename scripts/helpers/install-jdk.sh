@@ -27,9 +27,11 @@ install_openjdk_windows() {
   fi
   # TODO: Run command "choco install openjdk --version=17 --force -y" By powershell with admin permission and wait it finished
   if [ "$EUID" -ne 0 ]; then
+    # If the script is not being run as root, print a message and run the installation command with elevated privileges
     echo "Running with elevated privileges..."
     powershell -Command "Start-Process powershell -ArgumentList 'choco install -y openjdk17' -Verb RunAs -Wait"
   else
+    # If the script is already being run as root, just install OpenJDK using Chocolatey
     choco install -y openjdk17
   fi
 }
