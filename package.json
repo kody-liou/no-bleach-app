@@ -8,15 +8,13 @@
     "mobile"
   ],
   "scripts": {
-    "start": "vite",
+    "dev": "bash ./scripts/dev.sh",
     "build": "vite build",
     "preview": "vite preview",
     "sync": "cap sync",
-    "run:ios": "cap run ios",
+    "run:web": "bash ./scripts/run-web.sh",
     "run:android": "bash ./scripts/run-android.sh",
-    "open:ios": "cap open ios",
     "open:android": "cap open android",
-    "build:ios": "cap build ios",
     "build:android": "cap build android"
   },
   "dependencies": {
