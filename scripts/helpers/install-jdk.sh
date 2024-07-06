@@ -22,11 +22,10 @@ install_openjdk_windows() {
   if ! command_exists choco; then
     echo "Chocolatey is not installed. Installing Chocolatey..."
     set -e
-    # TODO: Make it not open another terminal, just use current terminal to install chocolatey
     powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
     set +e
   fi
-
+  # TODO: Run command "choco install openjdk --version=17 --force -y" By powershell with admin permission and wait it finished
   if [ "$EUID" -ne 0 ]; then
     echo "Running with elevated privileges..."
     powershell -Command "Start-Process powershell -ArgumentList 'choco install -y openjdk17' -Verb RunAs -Wait"
