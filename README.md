@@ -1,3 +1,8 @@
+## Install
+```bash
+corepack enable
+corepack pnpm install
+```
 ## Package management
 
 https://pnpm.io/zh-TW/installation
