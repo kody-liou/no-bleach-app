@@ -1,50 +1,38 @@
-# Use an official Ubuntu as a parent image
+# Use a base image with the necessary tools
 FROM ubuntu:20.04
 
-# Set environment variables to avoid prompts during installation
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install dependencies
+# Install required packages
 RUN apt-get update && \
-    apt-get install -y \
-    openjdk-17-jdk \
-    wget \
-    unzip \
-    curl \
-    git \
-    build-essential \
-    nodejs \
-    npm
+    apt-get install -y openjdk-17-jdk wget unzip curl git build-essential nodejs npm
 
 # Install pnpm
 RUN npm install -g pnpm
 
-# Set JAVA_HOME environment variable
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+# Install Android SDK command line tools
+RUN mkdir -p /usr/local/android-sdk/cmdline-tools && \
+    cd /usr/local/android-sdk/cmdline-tools && \
+    wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O commandlinetools.zip && \
+    unzip commandlinetools.zip -d latest && \
+    rm commandlinetools.zip
 
-# Install Android SDK
-RUN mkdir -p /usr/local/android-sdk && \
-    cd /usr/local/android-sdk && \
-    wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O android-sdk.zip && \
-    unzip android-sdk.zip && \
-    rm android-sdk.zip
-
-ENV ANDROID_HOME=/usr/local/android-sdk
-ENV PATH=$PATH:$ANDROID_HOME/cmdline-tools/bin
-ENV PATH=$PATH:$ANDROID_HOME/platform-tools
+# Set environment variables for Android SDK
+ENV ANDROID_SDK_ROOT /usr/local/android-sdk
+ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
 
 # Accept Android SDK licenses
-RUN yes | sdkmanager --licenses
+RUN yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
 
-# Copy the project files into the Docker image
+# Install Android SDK packages
+RUN sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+
+# Set the working directory
 WORKDIR /app
-COPY . .
 
-# Install project dependencies
-RUN ./scripts/install-dependencies.sh
+# Copy the application files
+COPY . /app
 
-# Make scripts executable
-RUN chmod +x ./scripts/helpers/*.sh
+# Install dependencies
+RUN corepack enable && corepack pnpm install
 
-# Set the entry point to the dev script
-ENTRYPOINT ["./scripts/start-android.sh"]
+# Default command
+CMD ["bash"]
