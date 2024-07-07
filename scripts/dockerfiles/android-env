@@ -1,12 +1,9 @@
-# Use a base image with the necessary tools
-FROM ubuntu:20.04
+# Use the official Node.js image as a base
+FROM node:20
 
 # Install required packages
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk wget unzip curl git build-essential nodejs npm
-
-# Install pnpm
-RUN npm install -g pnpm
+    apt-get install -y openjdk-17-jdk wget unzip curl git build-essential
 
 # Install Android SDK command line tools
 RUN mkdir -p /usr/local/android-sdk/cmdline-tools && \
@@ -17,7 +14,7 @@ RUN mkdir -p /usr/local/android-sdk/cmdline-tools && \
 
 # Set environment variables for Android SDK
 ENV ANDROID_SDK_ROOT /usr/local/android-sdk
-ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools
 
 # Accept Android SDK licenses
 RUN yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
@@ -35,4 +32,5 @@ COPY . /app
 RUN corepack enable && corepack pnpm install
 
 # Default command
+# TODO: Make it execute scripts/run-android.sh
 CMD ["bash"]
