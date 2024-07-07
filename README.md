@@ -1,7 +1,10 @@
 # Debug
+
 https://www.youtube.com/watch?v=AxSDEd_WJ3E
 https://www.youtube.com/watch?v=VN3VzMx8kSA
 https://www.youtube.com/watch?v=akh6V6Yw1lw
+https://www.youtube.com/watch?v=XoNDOYkx3nE
+https://www.youtube.com/watch?v=6OiHl0Sai_c
 
 # Trobleshooting
 
