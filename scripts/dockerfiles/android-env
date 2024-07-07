@@ -6,21 +6,21 @@ RUN apt-get update && \
     apt-get install -y openjdk-17-jdk wget unzip curl git build-essential
 
 # Install Android SDK command line tools
-RUN mkdir -p /usr/local/android-sdk/cmdline-tools && \
-    cd /usr/local/android-sdk/cmdline-tools && \
+RUN mkdir -p /usr/local/android-sdk/cmdline-tools/latest && \
+    cd /usr/local/android-sdk/cmdline-tools/latest && \
     wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O commandlinetools.zip && \
-    unzip commandlinetools.zip -d latest && \
+    unzip commandlinetools.zip && \
     rm commandlinetools.zip
 
 # Set environment variables for Android SDK
 ENV ANDROID_SDK_ROOT /usr/local/android-sdk
-ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools
+ENV PATH $PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
 
 # Accept Android SDK licenses
-RUN yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
+RUN yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
 
 # Install Android SDK packages
-RUN sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+RUN $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-30" "build-tools;30.0.3"
 
 # Set the working directory
 WORKDIR /app
