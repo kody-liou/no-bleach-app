@@ -17,6 +17,7 @@ project_root/
             install-jdk.sh: Script to install OpenJDK, required for building Android code.
         dev.sh: Script to debug the app.
         run-android.sh: Script to build the Android app bundle and run it in the Android emulator.
+        start-android.sh: Script to start the Docker container and run the Android build.
         
     ...other files in project
 ```

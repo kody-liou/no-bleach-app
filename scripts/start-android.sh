@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Function to check if Docker is running
+check_docker() {
+  if ! docker info >/dev/null 2>&1; then
+    echo "Docker is not running. Please start Docker and try again."
+    exit 1
+  fi
+}
+
+# Check if Docker is running
+check_docker
+
 # Define image name
 IMAGE_NAME="android-build"
 
