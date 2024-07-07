@@ -13,7 +13,7 @@
     "preview": "vite preview",
     "sync": "cap sync",
     "run:web": "bash ./scripts/run-web.sh",
-    "run:android": "bash ./scripts/start-android.sh",
+    "run:android": "bash ./scripts/build-android/start.sh",
     "open:android": "cap open android",
     "build:android": "cap build android"
   },
