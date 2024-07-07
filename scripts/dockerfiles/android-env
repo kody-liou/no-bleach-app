@@ -32,5 +32,4 @@ COPY . /app
 RUN corepack enable && corepack pnpm install
 
 # Default command
-# TODO: Make it execute scripts/run-android.sh
-CMD ["bash"]
+CMD ["bash", "/app/scripts/run-android.sh"]
