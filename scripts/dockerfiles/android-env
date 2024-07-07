@@ -1,5 +1,5 @@
 # from https://github.com/robingenz/docker-ionic-capacitor/blob/main/Dockerfile
-FROM ubuntu:22.04
+FROM node:20.15.0-bookworm
 
 ARG JAVA_VERSION=17
 ARG NODEJS_VERSION=20
