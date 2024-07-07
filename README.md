@@ -6,6 +6,8 @@ https://www.youtube.com/watch?v=akh6V6Yw1lw
 https://www.youtube.com/watch?v=XoNDOYkx3nE
 https://www.youtube.com/watch?v=6OiHl0Sai_c
 
+[Debugging Ionic Applications When Deployed to an Android Device](https://www.youtube.com/watch?v=Y1rD954ZyKA)
+
 # Trobleshooting
 
 - Android Gradle plugin requires Java 17 to run. You are currently using Java 11.
